@@ -5,141 +5,187 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hfd Pro Site</title>
     <style>
+        * {
+            box-sizing: border-box;
+        }
         body {
-            background-color: #11141a;
-            color: #e2e8f0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #0d1117;
+            color: #c9d1d9;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             margin: 0;
-            padding: 0;
+            padding: 20px 10px;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
         }
         .container {
-            max-width: 650px;
+            max-width: 720px;
             width: 100%;
-            padding: 40px 20px;
+            padding: 30px 20px;
             text-align: center;
         }
         .logo-placeholder {
-            font-size: 3rem;
-            margin-bottom: 10px;
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            display: inline-block;
             animation: float 3s ease-in-out infinite;
+            filter: drop-shadow(0 0 12px rgba(88, 166, 255, 0.4));
         }
         @keyframes float {
             0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-8px); }
             100% { transform: translateY(0px); }
         }
         h1 {
-            color: #ffffff;
-            font-size: 3rem;
-            margin: 0 0 15px 0;
-            letter-spacing: -1px;
-            font-weight: 700;
+            color: #f0f6fc;
+            font-size: 2.8rem;
+            margin: 0 0 12px 0;
+            letter-spacing: -0.5px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #8b949e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
         .description {
-            font-size: 1.1rem;
-            color: #94a3b8;
+            font-size: 1.05rem;
+            color: #8b949e;
             line-height: 1.6;
-            margin-bottom: 40px;
+            margin-bottom: 35px;
         }
+        
+        /* Yan yayan sıralanan ve taşınca alt satıra geçen buton listesi */
         .btn-list {
             display: flex;
-            flex-direction: column;
-            gap: 15px;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
             margin-bottom: 40px;
         }
         .custom-btn {
-            background-color: #1e222b;
-            border: 1px solid #2e3440;
+            background-color: #161b22;
+            border: 1px solid #30363d;
             color: #58a6ff;
-            padding: 14px 28px;
-            font-size: 1rem;
+            padding: 14px 20px;
+            font-size: 0.95rem;
             font-weight: 600;
-            border-radius: 8px;
+            border-radius: 10px;
             text-decoration: none;
-            transition: all 0.25s ease;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            /* Buton içi metinleri alt alta düzenli hizalamak için: */
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             gap: 4px;
+            flex: 1 1 calc(50% - 12px); /* İkişerli yan yana sıralar */
+            min-width: 220px; /* Çok küçülmesini engeller, sığmayınca alta atar */
         }
         .custom-btn:hover {
-            background-color: #252a36;
-            border-color: #4edbb3;
-            color: #4edbb3;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            background-color: #1f242c;
+            border-color: #58a6ff;
+            color: #79c0ff;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4), 0 0 10px rgba(88, 166, 255, 0.15);
+        }
+        .custom-btn:active {
+            transform: translateY(-1px);
         }
         .custom-btn .sub-text {
-            font-size: 0.85rem;
-            color: #8b98a7;
-            font-weight: normal;
+            font-size: 0.8rem;
+            color: #8b949e;
+            font-weight: 400;
         }
         .custom-btn.secondary {
-            color: #94a3b8;
+            color: #8b949e;
+            border-color: #21262d;
+            background-color: #0d1117;
         }
         .custom-btn.secondary:hover {
-            color: #ffffff;
-            border-color: #94a3b8;
+            color: #c9d1d9;
+            border-color: #484f58;
+            background-color: #161b22;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
+
         /* İletişim Formu Alanı */
         .form-section {
             background: #161b22;
             border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 25px;
+            border-radius: 14px;
+            padding: 28px;
             text-align: left;
-            margin-top: 50px;
+            margin-top: 40px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
         .form-section h3 {
             margin-top: 0;
-            color: #ffffff;
+            color: #f0f6fc;
             font-size: 1.3rem;
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
+            font-weight: 700;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 16px;
         }
         .form-group label {
             display: block;
-            margin-bottom: 5px;
-            font-size: 0.9rem;
-            color: #94a3b8;
+            margin-bottom: 6px;
+            font-size: 0.85rem;
+            color: #8b949e;
+            font-weight: 500;
         }
         .form-group input, .form-group textarea {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             background: #0d1117;
             border: 1px solid #30363d;
-            border-radius: 6px;
-            color: #ffffff;
+            border-radius: 8px;
+            color: #f0f6fc;
             font-family: inherit;
-            box-sizing: border-box;
+            font-size: 0.95rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
         .form-group input:focus, .form-group textarea:focus {
             outline: none;
             border-color: #58a6ff;
+            box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.15);
         }
         .submit-btn {
             width: 100%;
-            background: #21262d;
+            background: #238636;
             color: #ffffff;
-            border: 1px solid #30363d;
+            border: 1px solid rgba(240, 246, 252, 0.1);
             padding: 12px;
-            border-radius: 6px;
-            font-weight: bold;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
             cursor: pointer;
-            transition: 0.2s;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
         }
         .submit-btn:hover {
-            background: #30363d;
-            border-color: #8b98a7;
+            background: #2ea043;
+            box-shadow: 0 4px 12px rgba(46, 160, 67, 0.3);
+        }
+
+        /* Mobil Duyarlı Tasarım */
+        @media (max-width: 550px) {
+            .container {
+                padding: 20px 10px;
+            }
+            h1 {
+                font-size: 2.2rem;
+            }
+            .custom-btn {
+                flex: 1 1 100%; /* Mobilde tam genişlik alır */
+                min-width: 100%;
+            }
+            .form-section {
+                padding: 20px 15px;
+            }
         }
     </style>
 </head>
@@ -153,13 +199,21 @@
             Aşağıdaki bağlantılardan geliştirdiğim projelere göz atabilirsiniz.
         </p>
 
-        <!-- Link Alanı -->
+        <!-- Link Alanı (Yan Yana & Esnek) -->
         <div class="btn-list">
+            <a href="/hakkimda" class="custom-btn" target="_blank">
+                <span>ℹ️ Benim Hakkımda</span>
+            </a>
+            <a href="/hakkinda" class="custom-btn" target="_blank">
+                <span>ℹ️ Sitenin Hakkında</span>
+            </a>
             <a href="https://github.com/PyNetCoder/SuperNVim" class="custom-btn" target="_blank">
                 <span>🎯 SuperNVim Çekirdeğini Keşfedin</span>
+                <span class="sub-text">Geliştirdiğim güçlü bir Neovim yapılandırması</span>
             </a>
             <a href="https://github.com/PyNetCoder/hfdprosite" class="custom-btn" target="_blank">
                 <span>🌐 Bu Sitenin Kaynak Kodları</span>
+                <span class="sub-text">Hfd Pro Site'nin GitHub deposu</span>
             </a>
             <a href="/hesapmatik" class="custom-btn">
                 <span>🧮 HesapMatik</span>
@@ -175,22 +229,25 @@
             </a>
         </div>
 
-<!-- Netlify Uyumlu İletişim Formu -->
-<div class="form-section">
-    <h3>Bana Mesaj Gönderin</h3>
-    <form name="contact" method="POST" netlify data-netlify="true">
-        <div class="form-group">
-            <label>İsminiz</label>
-            <input type="text" name="name" required placeholder="Adınız Soyadınız">
+        <!-- Netlify Uyumlu İletişim Formu -->
+        <div class="form-section">
+            <h3>Bana Mesaj Gönderin</h3>
+            <form name="contact" method="POST" netlify data-netlify="true">
+                <div class="form-group">
+                    <label>İsminiz</label>
+                    <input type="text" name="name" required placeholder="Adınız Soyadınız">
+                </div>
+                <div class="form-group">
+                    <label>E-posta Adresiniz</label>
+                    <input type="email" name="email" required placeholder="ornek@eposta.com">
+                </div>
+                <div class="form-group">
+                    <label>Mesajınız</label>
+                    <textarea name="message" rows="4" required placeholder="Mesajınızı buraya yazın..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Gönder</button>
+            </form>
         </div>
-        <div class="form-group">
-            <label>E-posta Adresiniz</label>
-            <input type="email" name="email" required placeholder="ornek@eposta.com">
-        </div>
-        <div class="form-group">
-            <label>Mesajınız</label>
-            <textarea name="message" rows="4" required placeholder="Mesajınızı buraya yazın..."></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Gönder</button>
-    </form>
-</div>
+    </div>
+</body>
+</html>
