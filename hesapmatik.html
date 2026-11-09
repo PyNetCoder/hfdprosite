@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Hfd Pro Site - Hesapmatik</title>
+  
+  <style>
+    /* CSS: Sayfa Düzeni */
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #1e1e2e;
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    /* Türk Bayrağı Renklerinde Gradient (Kırmızı - Beyaz - Kırmızı) */
+    .gradient-power {
+      background: linear-gradient(45deg, #ff0000, #ffffff, #ff0000);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 900;
+      font-family: 'Arial Black', sans-serif;
+      font-size: 45px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 5px 0;
+      font-size: 28px;
+    }
+
+    .edition-yazisi {
+      margin: 5px 0;
+      font-size: 18px;
+      color: #cccccc;
+    }
+
+    .imza-yazisi {
+      font-size: 14px;
+      color: #888894;
+      font-style: italic;
+      margin: 5px 0 20px 0;
+    }
+
+    /* Hesap Makinesi Kutusu */
+    .hesap-makinesi {
+      background: #252538;
+      padding: 20px;
+      border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+      width: 320px;
+    }
+
+    /* Ekran Alanı */
+    #ekran {
+      width: 100%;
+      height: 60px;
+      background-color: #1a1a26;
+      border: none;
+      border-radius: 10px;
+      color: #00ffcc;
+      font-size: 32px;
+      text-align: right;
+      padding: 10px;
+      box-sizing: border-box;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    /* Buton Düzeni */
+    .tuslar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    button {
+      padding: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      color: white;
+      background-color: #313146;
+      transition: background 0.2s, transform 0.1s;
+    }
+
+    button:active {
+      transform: scale(0.95);
+    }
+
+    button:hover {
+      background-color: #3d3d56;
+    }
+
+    .temizle-btn { background-color: #f44336; }
+    .temizle-btn:hover { background-color: #da190b; }
+
+    .islem-btn { background-color: #ff9f0a; color: black; }
+    .islem-btn:hover { background-color: #e08b07; }
+
+    .esit-btn { background-color: #4caf50; }
+    .esit-btn:hover { background-color: #45a049; }
+  </style>
+</head>
+<body>
+
+  <!-- Bayrak renkli, düz boyutlu efsane başlık -->
+  <div class="gradient-power">
+    Hfd Pro Site PoWeR
+  </div>
+
+  <h1>Hfd Pro Site Hesapmatik</h1>
+  <p class="edition-yazisi">Hfd Pro Edition</p>
+  <p class="imza-yazisi">By: Hfd Pro</p>
+
+  <!-- Hesap Makinesi -->
+  <div class="hesap-makinesi">
+    <input type="text" id="ekran" readonly value="0">
+    
+    <div class="tuslar">
+      <button class="temizle-btn" onclick="ekraniTemizle()">C</button>
+      <button class="islem-btn" onclick="ekranaEkle('/')">/</button>
+      <button class="islem-btn" onclick="ekranaEkle('*')">x</button>
+      <button class="islem-btn" onclick="ekranaEkle('-')">-</button>
+      
+      <button onclick="ekranaEkle('7')">7</button>
+      <button onclick="ekranaEkle('8')">8</button>
+      <button onclick="ekranaEkle('9')">9</button>
+      <button class="islem-btn" onclick="ekranaEkle('+')">+</button>
+      
+      <button onclick="ekranaEkle('4')">4</button>
+      <button onclick="ekranaEkle('5')">5</button>
+      <button onclick="ekranaEkle('6')">6</button>
+      <button class="esit-btn" onclick="hesapla()">=</button>
+      
+      <button onclick="ekranaEkle('1')">1</button>
+      <button onclick="ekranaEkle('2')">2</button>
+      <button onclick="ekranaEkle('3')">3</button>
+      <button onclick="ekranaEkle('0')">0</button>
+    </div>
+  </div>
+
+  <script>
+    const ekran = document.getElementById("ekran");
+
+    function ekranaEkle(deger) {
+      if (ekran.value === "0" && !isNaN(deger)) {
+        ekran.value = deger;
+      } else {
+        ekran.value += deger;
+      }
+    }
+
+    function ekraniTemizle() {
+      ekran.value = "0";
+    }
+
+    function hesapla() {
+      try {
+        ekran.value = eval(ekran.value);
+      } catch (hata) {
+        ekran.value = "Hata!";
+      }
+    }
+  </script>
+</body>
+</html>

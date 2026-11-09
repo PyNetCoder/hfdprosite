@@ -1,57 +1,200 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hfd Pro Site/title>
+    <title>Hfd Pro Site</title>
     <style>
         body {
-            background-color: #0b0e14;
-            color: #c5cdd8;
+            background-color: #11141a;
+            color: #e2e8f0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding-top: 15vh;
             margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
         }
         .container {
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 20px;
+            max-width: 650px;
+            width: 100%;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .logo-placeholder {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
         h1 {
-            color: #4edbb3;
-            font-size: 2.5rem;
-            letter-spacing: 2px;
-            margin-bottom: 10px;
+            color: #ffffff;
+            font-size: 3rem;
+            margin: 0 0 15px 0;
+            letter-spacing: -1px;
+            font-weight: 700;
         }
-        p {
+        .description {
             font-size: 1.1rem;
-            color: #8b98a7;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 40px;
         }
-        .project-badge {
-            display: inline-block;
+        .btn-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .custom-btn {
+            background-color: #1e222b;
+            border: 1px solid #2e3440;
+            color: #58a6ff;
+            padding: 14px 28px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            /* Buton içi metinleri alt alta düzenli hizalamak için: */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+        .custom-btn:hover {
+            background-color: #252a36;
+            border-color: #4edbb3;
+            color: #4edbb3;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+        }
+        .custom-btn .sub-text {
+            font-size: 0.85rem;
+            color: #8b98a7;
+            font-weight: normal;
+        }
+        .custom-btn.secondary {
+            color: #94a3b8;
+        }
+        .custom-btn.secondary:hover {
+            color: #ffffff;
+            border-color: #94a3b8;
+        }
+        /* İletişim Formu Alanı */
+        .form-section {
             background: #161b22;
             border: 1px solid #30363d;
-            padding: 10px 20px;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: left;
+            margin-top: 50px;
+        }
+        .form-section h3 {
+            margin-top: 0;
+            color: #ffffff;
+            font-size: 1.3rem;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 10px;
+            background: #0d1117;
+            border: 1px solid #30363d;
             border-radius: 6px;
-            margin-top: 30px;
-            color: #58a6ff;
-            text-decoration: none;
+            color: #ffffff;
+            font-family: inherit;
+            box-sizing: border-box;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #58a6ff;
+        }
+        .submit-btn {
+            width: 100%;
+            background: #21262d;
+            color: #ffffff;
+            border: 1px solid #30363d;
+            padding: 12px;
+            border-radius: 6px;
             font-weight: bold;
+            cursor: pointer;
             transition: 0.2s;
         }
-        .project-badge:hover {
-            background: #21262d;
+        .submit-btn:hover {
+            background: #30363d;
             border-color: #8b98a7;
-            transform: translateY(-2px);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>⚡ Hfd Pro Site 🚀</h1>
-        <p>Benim siteme hoş geldiniz!</p>
-        <a href="https://github.com/PyNetCoder/SuperNVim" class="project-badge">🎯 SuperNVim Çekirdeğini Keşfedin</a>
+        <div class="logo-placeholder">⚡</div>
+        <h1>Hfd Pro Site</h1>
+        
+        <p class="description">
+            Backend ve masaüstü yazılım dillerine meraklı bir geliştirici tarafından kurulan modern bir platform. 
+            Aşağıdaki bağlantılardan geliştirdiğim projelere göz atabilirsiniz.
+        </p>
+
+        <!-- Link Alanı -->
+        <div class="btn-list">
+            <a href="https://github.com" class="custom-btn" target="_blank">
+                <span>🎯 SuperNVim Çekirdeğini Keşfedin</span>
+            </a>
+            <a href="https://github.com" class="custom-btn" target="_blank">
+                <span>🌐 Bu Sitenin Kaynak Kodları</span>
+            </a>
+            <a href="/hesapmatik" class="custom-btn">
+                <span>🧮 HesapMatik</span>
+                <span class="sub-text">Güçlü bir hesap makinesi</span>
+            </a>
+            <a href="#" class="custom-btn secondary">
+                <span>💻 Masaüstü Projelerim</span>
+                <span class="sub-text">(Yakında)</span>
+            </a>
+            <a href="#" class="custom-btn secondary">
+                <span>⚙️ Backend API Dökümantasyonu</span>
+                <span class="sub-text">(Yakında)</span>
+            </a>
+        </div>
+
+        <!-- Netlify Uyumlu İletişim Formu (Backend gerektirmez) -->
+        <div class="form-section">
+            <h3>Bana Mesaj Gönderin</h3>
+            <form name="contact" method="POST" data-netlify="true">
+                <div class="form-group">
+                    <label>İsminiz</label>
+                    <input type="text" name="name" required placeholder="Adınız Soyadınız">
+                </div>
+                <div class="form-group">
+                    <label>E-posta Adresiniz</label>
+                    <input type="email" name="email" required placeholder="ornek@eposta.com">
+                </div>
+                <div class="form-group">
+                    <label>Mesajınız</label>
+                    <textarea name="message" rows="4" required placeholder="Mesajınızı buraya yazın..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Gönder</button>
+            </form>
+        </div>
+
     </div>
 </body>
 </html>
