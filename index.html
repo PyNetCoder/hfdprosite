@@ -233,27 +233,13 @@
             </a>
         </div>
 
-<!-- Netlify Uyumlu İletişim Formu -->
-<div class="form-section">
-    <h3>Bana Mesaj Gönderin</h3>
-    <form name="contact" method="POST" netlify data-netlify="true" netlify-honeypot="bot-field" action="/tesekkurler.html">
-        <!-- Bot Koruması (Kullanıcıya görünmez) -->
-        <p hidden>
-            <label>Bot alanı: <input name="bot-field"></label>
-        </p>
-
-        <div class="form-group">
-            <label for="name">İsminiz</label>
-            <input type="text" id="name" name="name" required placeholder="Adınız Soyadınız">
-        </div>
-        <div class="form-group">
-            <label for="email">E-posta Adresiniz</label>
-            <input type="email" id="email" name="email" required placeholder="ornek@eposta.com">
-        </div>
-        <div class="form-group">
-            <label for="message">Mesajınız</label>
-            <textarea id="message" name="message" rows="4" required placeholder="Mesajınızı buraya yazın..."></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Gönder</button>
-    </form>
+<!-- Doğrudan E-posta İletişim Bölümü -->
+<div class="form-section" style="text-align: center;">
+    <h3>Bana Ulaşın</h3>
+    <p class="description" style="margin-bottom: 24px;">
+        Projelerim hakkında soru sormak veya iletişime geçmek için doğrudan e-posta gönderebilirsiniz.
+    </p>
+    <a href="mailto:iletishim1246@gmail.com" class="submit-btn" style="display: inline-block; text-decoration: none;">
+        ✉️ E-posta Gönder
+    </a>
 </div>
