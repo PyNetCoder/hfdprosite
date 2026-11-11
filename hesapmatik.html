@@ -2,43 +2,53 @@
 <html lang="tr">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Hfd Pro Site Hesapmatik - Hassas ondalık hesaplama, parantezli işlem desteği ve gelişmiş güvenli matematik motoruna sahip modern web hesap makinesi.">
   <title>Hfd Pro Site - Hesapmatik</title>
   
   <style>
-    /* CSS: Sayfa Düzeni */
+    /* Sayfa Düzeni ve Duyarlılık */
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      font-family: 'Segoe UI', sans-serif;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
       background-color: #1e1e2e;
       color: #ffffff;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      height: 100vh;
+      min-height: 100vh;
       margin: 0;
+      padding: 15px;
     }
 
-    /* Türk Bayrağı Renklerinde Gradient (Kırmızı - Beyaz - Kırmızı) */
+    /* Başlık ve Stil Alanları */
     .gradient-power {
       background: linear-gradient(45deg, #ff0000, #ffffff, #ff0000);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       font-weight: 900;
       font-family: 'Arial Black', sans-serif;
-      font-size: 45px;
+      font-size: clamp(24px, 6vw, 45px);
       margin-bottom: 5px;
       text-align: center;
+      line-height: 1.2;
     }
 
     h1 {
       margin: 5px 0;
-      font-size: 28px;
+      font-size: clamp(20px, 4vw, 28px);
+      text-align: center;
     }
 
     .edition-yazisi {
       margin: 5px 0;
-      font-size: 18px;
+      font-size: 16px;
       color: #cccccc;
+      text-align: center;
     }
 
     .imza-yazisi {
@@ -46,54 +56,95 @@
       color: #888894;
       font-style: italic;
       margin: 5px 0 20px 0;
+      text-align: center;
     }
 
-    /* Hesap Makinesi Kutusu */
+    /* Hesap Makinesi Kapsayıcısı (Duyarlı Genişlik) */
     .hesap-makinesi {
       background: #252538;
       padding: 20px;
       border-radius: 20px;
       box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-      width: 320px;
+      width: 100%;
+      max-width: 360px;
+      min-width: 280px;
     }
 
     /* Ekran Alanı */
-    #ekran {
-      width: 100%;
-      height: 60px;
-      background-color: #1a1a26;
-      border: none;
-      border-radius: 10px;
-      color: #00ffcc;
-      font-size: 32px;
-      text-align: right;
-      padding: 10px;
-      box-sizing: border-box;
-      margin-bottom: 20px;
-      font-weight: bold;
+    .ekran-konteyner {
+      position: relative;
+      margin-bottom: 15px;
     }
 
-    /* Buton Düzeni */
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    #ekran {
+      width: 100%;
+      height: 65px;
+      background-color: #1a1a26;
+      border: 2px solid #313146;
+      border-radius: 12px;
+      color: #00ffcc;
+      font-size: 28px;
+      text-align: right;
+      padding: 10px 15px;
+      font-weight: bold;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    #ekran:focus {
+      border-color: #00ffcc;
+    }
+
+    /* Uyarı / Hata Mesajı Kutusu */
+    #bildirim {
+      min-height: 20px;
+      font-size: 13px;
+      color: #ff5555;
+      margin-bottom: 10px;
+      text-align: right;
+      font-weight: 600;
+    }
+
+    /* Buton Düzeni (Responsive Pad) */
     .tuslar {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 10px;
     }
 
     button {
-      padding: 20px;
-      font-size: 20px;
+      padding: 15px 0;
+      font-size: 18px;
       font-weight: bold;
       border: none;
       border-radius: 12px;
       cursor: pointer;
       color: white;
       background-color: #313146;
-      transition: background 0.2s, transform 0.1s;
+      transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+      user-select: none;
+      touch-action: manipulation;
+    }
+
+    button:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 2px;
     }
 
     button:active {
-      transform: scale(0.95);
+      transform: scale(0.96);
     }
 
     button:hover {
@@ -103,16 +154,40 @@
     .temizle-btn { background-color: #f44336; }
     .temizle-btn:hover { background-color: #da190b; }
 
-    .islem-btn { background-color: #ff9f0a; color: black; }
+    .sil-btn { background-color: #ff9800; }
+    .sil-btn:hover { background-color: #e68a00; }
+
+    .islem-btn { background-color: #ff9f0a; color: #000000; }
     .islem-btn:hover { background-color: #e08b07; }
 
     .esit-btn { background-color: #4caf50; }
     .esit-btn:hover { background-color: #45a049; }
+
+    .parantez-btn { background-color: #4a4a6a; }
+    .parantez-btn:hover { background-color: #5a5a7a; }
+
+    /* Mobil Ekran Uyum Kuralı (320px ve altı) */
+    @media (max-width: 340px) {
+      .hesap-makinesi {
+        padding: 12px;
+      }
+      .tuslar {
+        gap: 6px;
+      }
+      button {
+        padding: 12px 0;
+        font-size: 16px;
+        border-radius: 8px;
+      }
+      #ekran {
+        height: 55px;
+        font-size: 22px;
+      }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Bayrak renkli, düz boyutlu efsane başlık -->
   <div class="gradient-power">
     Hfd Pro Site PoWeR
   </div>
@@ -121,55 +196,312 @@
   <p class="edition-yazisi">Hfd Pro Edition</p>
   <p class="imza-yazisi">By: Hfd Pro</p>
 
-  <!-- Hesap Makinesi -->
-  <div class="hesap-makinesi">
-    <input type="text" id="ekran" readonly value="0">
+  <div class="hesap-makinesi" role="region" aria-label="Hesap Makinesi">
+    <div class="ekran-konteyner">
+      <label for="ekran" class="sr-only">Hesaplama Ekranı ve İfadeler</label>
+      <input type="text" id="ekran" readonly value="0" aria-live="polite" aria-label="Hesaplama Ekranı">
+    </div>
     
+    <div id="bildirim" aria-live="assertive"></div>
+
     <div class="tuslar">
-      <button class="temizle-btn" onclick="ekraniTemizle()">C</button>
-      <button class="islem-btn" onclick="ekranaEkle('/')">/</button>
-      <button class="islem-btn" onclick="ekranaEkle('*')">x</button>
-      <button class="islem-btn" onclick="ekranaEkle('-')">-</button>
-      
+      <button class="temizle-btn" onclick="ekraniTemizle()" aria-label="Tümünü Temizle">C</button>
+      <button class="sil-btn" onclick="sonKarakteriSil()" aria-label="Son Karakteri Sil">⌫</button>
+      <button class="parantez-btn" onclick="ekranaEkle('(')" aria-label="Sol Parantez">(</button>
+      <button class="parantez-btn" onclick="ekranaEkle(')')" aria-label="Sağ Parantez">)</button>
+
       <button onclick="ekranaEkle('7')">7</button>
       <button onclick="ekranaEkle('8')">8</button>
       <button onclick="ekranaEkle('9')">9</button>
-      <button class="islem-btn" onclick="ekranaEkle('+')">+</button>
-      
+      <button class="islem-btn" onclick="ekranaEkle('/')" aria-label="Bölme">/</button>
+
       <button onclick="ekranaEkle('4')">4</button>
       <button onclick="ekranaEkle('5')">5</button>
       <button onclick="ekranaEkle('6')">6</button>
-      <button class="esit-btn" onclick="hesapla()">=</button>
-      
+      <button class="islem-btn" onclick="ekranaEkle('*')" aria-label="Çarpma">x</button>
+
       <button onclick="ekranaEkle('1')">1</button>
       <button onclick="ekranaEkle('2')">2</button>
       <button onclick="ekranaEkle('3')">3</button>
+      <button class="islem-btn" onclick="ekranaEkle('-')" aria-label="Çıkarma">-</button>
+
       <button onclick="ekranaEkle('0')">0</button>
+      <button onclick="ekranaEkle(',')" aria-label="Virgül veya Nokta">,</button>
+      <button class="esit-btn" onclick="hesapla()" aria-label="Hesapla">=</button>
+      <button class="islem-btn" onclick="ekranaEkle('+')" aria-label="Toplama">+</button>
     </div>
   </div>
 
   <script>
     const ekran = document.getElementById("ekran");
+    const bildirim = document.getElementById("bildirim");
+    let yeniHesaplamaBaslasin = false;
+
+    function mesajGoster(mesaj) {
+      bildirim.textContent = mesaj;
+    }
+
+    function mesajTemizle() {
+      bildirim.textContent = "";
+    }
 
     function ekranaEkle(deger) {
-      if (ekran.value === "0" && !isNaN(deger)) {
-        ekran.value = deger;
-      } else {
-        ekran.value += deger;
+      mesajTemizle();
+
+      if (yeniHesaplamaBaslasin) {
+        if (!isNaN(deger) || deger === ',' || deger === '.' || deger === '(') {
+          ekran.value = "";
+        }
+        yeniHesaplamaBaslasin = false;
       }
+
+      if (ekran.value === "0" && !isNaN(deger) && deger !== "") {
+        ekran.value = deger;
+        return;
+      }
+
+      if (ekran.value === "0" && (deger === ',' || deger === '.')) {
+        ekran.value = "0,";
+        return;
+      }
+
+      ekran.value += deger;
     }
 
     function ekraniTemizle() {
       ekran.value = "0";
+      yeniHesaplamaBaslasin = false;
+      mesajTemizle();
+    }
+
+    function sonKarakteriSil() {
+      mesajTemizle();
+      if (yeniHesaplamaBaslasin) {
+        ekraniTemizle();
+        return;
+      }
+      if (ekran.value.length <= 1) {
+        ekran.value = "0";
+      } else {
+        ekran.value = ekran.value.slice(0, -1);
+      }
+    }
+
+    // --- Güvenli İfade Motoru & Parser ---
+
+    function tokenize(expr) {
+      const tokens = [];
+      let i = 0;
+      // Virgülleri noktaya çevirerek tokenize et
+      const normalized = expr.replace(/,/g, '.');
+
+      while (i < normalized.length) {
+        const char = normalized[i];
+
+        if (/\s/.test(char)) {
+          i++;
+          continue;
+        }
+
+        if (/[0-9\.]/.test(char)) {
+          let numStr = "";
+          let dotCount = 0;
+          while (i < normalized.length && /[0-9\.]/.test(normalized[i])) {
+            if (normalized[i] === '.') {
+              dotCount++;
+              if (dotCount > 1) {
+                throw new Error("Geçersiz ondalık biçimi!");
+              }
+            }
+            numStr += normalized[i];
+            i++;
+          }
+          tokens.push({ type: 'NUMBER', value: parseFloat(numStr) });
+          continue;
+        }
+
+        if (['+', '-', '*', '/', '(', ')'].includes(char)) {
+          // Negatif sayı tespiti (Unary Minus)
+          if (char === '-') {
+            const prevToken = tokens[tokens.length - 1];
+            if (!prevToken || prevToken.type === 'OPERATOR' || (prevToken.type === 'PAREN' && prevToken.value === '(')) {
+              let j = i + 1;
+              while (j < normalized.length && /\s/.test(normalized[j])) j++;
+              if (j < normalized.length && /[0-9\.]/.test(normalized[j])) {
+                let numStr = "-";
+                i = j;
+                let dotCount = 0;
+                while (i < normalized.length && /[0-9\.]/.test(normalized[i])) {
+                  if (normalized[i] === '.') {
+                    dotCount++;
+                    if (dotCount > 1) throw new Error("Geçersiz ondalık biçimi!");
+                  }
+                  numStr += normalized[i];
+                  i++;
+                }
+                tokens.push({ type: 'NUMBER', value: parseFloat(numStr) });
+                continue;
+              }
+            }
+          }
+
+          if (char === '(' || char === ')') {
+            tokens.push({ type: 'PAREN', value: char });
+          } else {
+            tokens.push({ type: 'OPERATOR', value: char });
+          }
+          i++;
+          continue;
+        }
+
+        throw new Error(`Bilinmeyen karakter: ${char}`);
+      }
+      return tokens;
+    }
+
+    function parseTokensToRPN(tokens) {
+      const outputQueue = [];
+      const operatorStack = [];
+      const precedence = { '+': 1, '-': 1, '*': 2, '/': 2 };
+
+      for (let i = 0; i < tokens.length; i++) {
+        const token = tokens[i];
+
+        if (token.type === 'NUMBER') {
+          outputQueue.push(token);
+        } else if (token.type === 'OPERATOR') {
+          while (
+            operatorStack.length > 0 &&
+            operatorStack[operatorStack.length - 1].type === 'OPERATOR' &&
+            precedence[operatorStack[operatorStack.length - 1].value] >= precedence[token.value]
+          ) {
+            outputQueue.push(operatorStack.pop());
+          }
+          operatorStack.push(token);
+        } else if (token.type === 'PAREN' && token.value === '(') {
+          operatorStack.push(token);
+        } else if (token.type === 'PAREN' && token.value === ')') {
+          let foundMatchingParen = false;
+          while (operatorStack.length > 0) {
+            const top = operatorStack.pop();
+            if (top.type === 'PAREN' && top.value === '(') {
+              foundMatchingParen = true;
+              break;
+            } else {
+              outputQueue.push(top);
+            }
+          }
+          if (!foundMatchingParen) {
+            throw new Error("Parantez eşleşme hatası!");
+          }
+        }
+      }
+
+      while (operatorStack.length > 0) {
+        const top = operatorStack.pop();
+        if (top.type === 'PAREN') {
+          throw new Error("Eksik kapatılmamış parantez!");
+        }
+        outputQueue.push(top);
+      }
+
+      return outputQueue;
+    }
+
+    function evaluateRPN(rpnTokens) {
+      const stack = [];
+
+      for (let token of rpnTokens) {
+        if (token.type === 'NUMBER') {
+          stack.push(token.value);
+        } else if (token.type === 'OPERATOR') {
+          if (stack.length < 2) {
+            throw new Error("Hatalı matematiksel ifade!");
+          }
+          const b = stack.pop();
+          const a = stack.pop();
+          let res = 0;
+
+          switch (token.value) {
+            case '+': res = a + b; break;
+            case '-': res = a - b; break;
+            case '*': res = a * b; break;
+            case '/':
+              if (Math.abs(b) < 1e-12) {
+                throw new Error("Sıfıra bölme hatası!");
+              }
+              res = a / b;
+              break;
+          }
+
+          if (!isFinite(res) || isNaN(res)) {
+            throw new Error("Geçersiz hesaplama sonucu!");
+          }
+          stack.push(res);
+        }
+      }
+
+      if (stack.length !== 1) {
+        throw new Error("Eksik veya fazla operatör girişi!");
+      }
+
+      return stack[0];
+    }
+
+    // Kayan Nokta (Floating-Point) Hassasiyet Düzeltmesi (örn. 0.1 + 0.2 = 0.3)
+    function formatNumberResult(num) {
+      if (!isFinite(num) || isNaN(num)) {
+        throw new Error("Geçersiz sayısal değer!");
+      }
+      
+      // Maksimum 10 ondalık basamak hassasiyet sınırı verip floating point artıklarını temizle
+      let cleanNum = Number(Math.round(num + "e10") + "e-10");
+      
+      let strResult = cleanNum.toString();
+      
+      // Türk formatı için noktayı virgüle çevir
+      return strResult.replace('.', ',');
     }
 
     function hesapla() {
+      mesajTemizle();
       try {
-        ekran.value = eval(ekran.value);
+        if (!ekran.value || ekran.value.trim() === "") return;
+
+        const tokens = tokenize(ekran.value);
+        if (tokens.length === 0) return;
+
+        const rpn = parseTokensToRPN(tokens);
+        const hamSonuc = evaluateRPN(rpn);
+        const formatliSonuc = formatNumberResult(hamSonuc);
+
+        ekran.value = formatliSonuc;
+        yeniHesaplamaBaslasin = true;
       } catch (hata) {
-        ekran.value = "Hata!";
+        mesajGoster(hata.message || "Hesaplama hatası!");
+        yeniHesaplamaBaslasin = true;
       }
     }
+
+    // --- Klavye Desteği ---
+    document.addEventListener("keydown", function (e) {
+      const key = e.key;
+
+      if (/[0-9]/.test(key)) {
+        ekranaEkle(key);
+      } else if (key === "+" || key === "-" || key === "*" || key === "/" || key === "(" || key === ")") {
+        ekranaEkle(key);
+      } else if (key === "." || key === ",") {
+        ekranaEkle(",");
+      } else if (key === "Enter" || key === "=") {
+        e.preventDefault();
+        hesapla();
+      } else if (key === "Backspace") {
+        sonKarakteriSil();
+      } else if (key === "Escape" || key === "Delete") {
+        ekraniTemizle();
+      }
+    });
   </script>
 </body>
 </html>
